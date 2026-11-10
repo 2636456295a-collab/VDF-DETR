@@ -53,7 +53,7 @@ Fine-tuned from the official COCO weight `deimv2_pico_coco.safetensors` (obtain 
 
 ## Data
 
-A public subset (525 review-test pairs with 2 525 `surfacing` annotations and validity masks, plus 50 demonstration samples) is released with a permanent DOI; training and validation splits are available on reasonable request. See `DATASET.md`.
+The review-test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. See `DATASET.md`.
 
 ## License
 
