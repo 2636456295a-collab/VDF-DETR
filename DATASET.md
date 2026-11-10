@@ -20,7 +20,7 @@ Dissolved oxygen was logged **once every 10 minutes**. These are stage-level env
 ## Public subset
 
 - Review test split: 525 paired RGB-D images, 2 525 `surfacing` annotations, validity masks
-- 50 demonstration samples drawn from the training/validation splits, illustrating annotation format, RGB-D pairing and the appearance of missing depth
+- Format notes inside `annotations.zip`: category definition, bbox convention, depth units and the validity-mask rule
 - Training (4 200) and validation (525) splits: available from the corresponding author on reasonable request
 - Review-test subset (13 independently extractable ZIP parts + `MANIFEST.json` with SHA-256 sums): **https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset**
 - Permanent archive DOI: **to be added**
@@ -48,5 +48,5 @@ The released dataset subset is licensed under **CC BY 4.0** (or CC BY-NC 4.0 if 
 
 ```
 Anonymous (under review). VDF-DETR: paired RGB-D surfacing-fish detection dataset
-(review-test subset and demonstration samples) [Dataset]. Zenodo. DOI: [to be added].
+(review-test subset) [Dataset]. Zenodo. DOI: [to be added].
 ```
