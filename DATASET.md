@@ -11,7 +11,7 @@ Self-collected paired RGB-D images of juvenile mandarin fish (*Siniperca chuatsi
 | Test | 525 | 2 525 | public subset |
 | **Total** | **5 250** | — | single class |
 
-The training, validation and test splits are separated by acquisition day: frames from a given day belong to exactly one split, and the test split consists of days not used for training or validation.
+The training, validation and test splits are separated by recording session: frames from a given session belong to exactly one split, and the test split comes from an acquisition day not used for training or validation.
 
 Each sample consists of an RGB image, the aligned depth map, and a binary **validity mask M** marking reliable depth readings. Depth values that are missing or invalid (water-surface reflection, absorption, out-of-range) are flagged by M, which is the input to the VGDF module.
 
