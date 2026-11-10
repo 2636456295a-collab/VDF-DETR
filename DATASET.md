@@ -22,13 +22,14 @@ Dissolved oxygen was logged **once every 10 minutes**. These are stage-level env
 - Review test split: 525 paired RGB-D images, 2 525 `surfacing` annotations, validity masks
 - 50 demonstration samples drawn from the training/validation splits, illustrating annotation format, RGB-D pairing and the appearance of missing depth
 - Training (4 200) and validation (525) splits: available from the corresponding author on reasonable request
-- Permanent archive and DOI: **to be added**
+- Review-test subset (13 independently extractable ZIP parts + `MANIFEST.json` with SHA-256 sums): **https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset**
+- Permanent archive DOI: **to be added**
 
-The files are hosted outside this repository because a full paired RGB-D subset exceeds GitHub's practical file-size limits. This repository contains code, configurations and data documentation only.
+The files are attached to the repository's `v1.0-testset` GitHub Release rather than committed to git, because the subset is ~855 MB. Each ZIP extracts independently; `MANIFEST.json` lists per-part SHA-256 checksums. The git tree contains code, configurations and documentation only.
 
 ## Annotation format
 
-- COCO JSON, single category `surfacing`
+- COCO JSON, single category `surfacing` (shipped in `annotations.zip` together with `test_images.txt` and format notes)
 - Boxes are axis-aligned whole-fish rectangles of surfacing individuals (`xywh` in the COCO JSON)
 - RGB and depth are paired by acquisition timestamp; the validity mask is derived from the depth channel
 - Overlapping individuals are annotated separately; annotation rules are summarized in the manuscript (Section 2.2)
