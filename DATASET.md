@@ -11,6 +11,8 @@ Self-collected paired RGB-D images of juvenile mandarin fish (*Siniperca chuatsi
 | Test | 525 | 2 525 | public subset |
 | **Total** | **5 250** | — | single class |
 
+The training, validation and test splits are separated by acquisition day: frames from a given day belong to exactly one split, and the test split consists of days not used for training or validation.
+
 Each sample consists of an RGB image, the aligned depth map, and a binary **validity mask M** marking reliable depth readings. Depth values that are missing or invalid (water-surface reflection, absorption, out-of-range) are flagged by M, which is the input to the VGDF module.
 
 Dissolved oxygen was logged **once every 10 minutes**. These are stage-level environmental records, not per-frame labels, and are not used as detection targets.
