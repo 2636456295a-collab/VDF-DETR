@@ -5,7 +5,7 @@ Official implementation of **VDF-DETR**, a lightweight RGB-D detector for single
 
 ## Main results
 
-Unified review test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
+Unified test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
 
 | Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) |
 |---|---|---|---|---|---|
@@ -34,7 +34,7 @@ VGDF concatenates the masked depth `D⊙M` with the binary validity mask `M` bef
 
 ```
 src/    model definition, A/B/C modules, data interface, standalone trainer
-tools/  unified evaluation on validation and review test splits
+tools/  unified evaluation on validation and test splits
 configs/formal50.md            exact 50-epoch training and evaluation protocol
 configs/depth_intervention.md  depth-input intervention conditions (Section 3.4)
 DATASET.md                     data composition, public subset, annotation format, license
@@ -53,7 +53,7 @@ Fine-tuned from the official COCO weight `deimv2_pico_coco.safetensors` (obtain 
 
 ## Data
 
-The review-test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. See `DATASET.md`.
+The test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. See `DATASET.md`.
 
 ## License
 
