@@ -8,21 +8,21 @@ Self-collected paired RGB-D images of juvenile mandarin fish (*Siniperca chuatsi
 |---|---|---|---|
 | Training | 4 200 | — | not public |
 | Validation | 525 | 2 550 (4.857 per image) | not public |
-| Review test | 525 | 2 525 | public subset |
+| Test | 525 | 2 525 | public subset |
 | **Total** | **5 250** | — | single class |
 
 Each sample consists of an RGB image, the aligned depth map, and a binary **validity mask M** marking reliable depth readings. Depth values that are missing or invalid (water-surface reflection, absorption, out-of-range) are flagged by M, which is the input to the VGDF module.
 
 Dissolved oxygen was logged **once every 10 minutes**. These are stage-level environmental records, not per-frame labels, and are not used as detection targets.
 
-> **Important:** the depth-intervention experiment (Table 3 of the manuscript) uses a **different** 525-image validation set with 2 550 boxes. It is not the review-test split released here. Keep the two partitions separate when re-running the evaluation.
+> **Important:** the depth-intervention experiment (Table 3 of the manuscript) uses a **different** 525-image validation set with 2 550 boxes. It is not the test split released here. Keep the two partitions separate when re-running the evaluation.
 
 ## Public subset
 
-- Review test split: 525 paired RGB-D images, 2 525 `surfacing` annotations, validity masks
+- Test split: 525 paired RGB-D images, 2 525 `surfacing` annotations, validity masks
 - Format notes inside `annotations.zip`: category definition, bbox convention, depth units and the validity-mask rule
 - Training (4 200) and validation (525) splits: available from the corresponding author on reasonable request
-- Review-test subset (13 independently extractable ZIP parts + `MANIFEST.json` with SHA-256 sums): **https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset**
+- Test subset (13 independently extractable ZIP parts + `MANIFEST.json` with SHA-256 sums): **https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset**
 - Permanent archive DOI: **to be added**
 
 The files are attached to the repository's `v1.0-testset` GitHub Release rather than committed to git, because the subset is ~855 MB. Each ZIP extracts independently; `MANIFEST.json` lists per-part SHA-256 checksums. The git tree contains code, configurations and documentation only.
@@ -48,5 +48,5 @@ The released dataset subset is licensed under **CC BY 4.0** (or CC BY-NC 4.0 if 
 
 ```
 Anonymous (under review). VDF-DETR: paired RGB-D surfacing-fish detection dataset
-(review-test subset) [Dataset]. Zenodo. DOI: [to be added].
+(test subset) [Dataset]. Zenodo. DOI: [to be added].
 ```
