@@ -9,7 +9,7 @@ These are the original research scripts used for the formal 50-epoch experiments
 | `short20_deim_core.py` | DEIMv2-Pico baseline adapter: official model/criterion loading, decoding (confidence floor 0.001), 200-query output cap, data/target conversion. |
 | `short20_common.py` | Shared IO, retry and job utilities. |
 | `formal_train.py` | Standalone trainer reproducing the exact loop (AdamW, backbone lr_scale 0.5, EMA 0.9999 / 2000 warmups, epoch-wise linear decay, clip 10, fliplr 0.5) without the legacy queue dependencies. Writes the full hyperparameter record into each run's config. |
-| `../tools/formal50_unified_eval.py` | Unified recomputation of COCO AP and P/R/F1 for all 15 models on the review test split. |
+| `../tools/formal50_unified_eval.py` | Unified recomputation of COCO AP and P/R/F1 for all 15 models on the test split. |
 | `../tools/cloud_unified_validation.py` | Corresponding recomputation on the 525-frame validation split. |
 
 ## Internal keys
