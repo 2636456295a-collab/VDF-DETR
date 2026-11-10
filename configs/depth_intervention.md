@@ -18,7 +18,7 @@ All three conditions use the **same trained VDF-DETR weights and the same images
 
 ## Data
 
-525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image review test set used for Tables 1–2. Keep the two partitions separate when reproducing.
+525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image test set used for Tables 1–2. Keep the two partitions separate when reproducing.
 
 ## Metrics
 
