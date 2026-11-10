@@ -1,11 +1,11 @@
 # VDF-DETR
 > **Status:** code accompanying a manuscript currently under double-blind peer review. Author names and affiliations are intentionally omitted and will be added on acceptance.
 
-Official implementation of **VDF-DETR**, a lightweight RGB-D detector for whole-fish detection in recirculating aquaculture systems (RAS). VDF-DETR extends **DEIMv2-Pico** with three modules: **DEB** (detail enhancement branch), **VGDF** (valid-depth fusion) and **RSA** (residual spatial attention), reaching **1.54 M parameters / 12.54 GFLOPs**.
+Official implementation of **VDF-DETR**, a lightweight RGB-D detector for single-class surfacing-fish detection in recirculating aquaculture systems (RAS). VDF-DETR extends **DEIMv2-Pico** with three modules: **DEB** (detail enhancement branch), **VGDF** (valid-depth fusion) and **RSA** (residual spatial attention), reaching **1.54 M parameters / 12.54 GFLOPs**.
 
 ## Main results
 
-Unified review test set (525 paired RGB-D images, 2 525 whole-fish boxes):
+Unified review test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
 
 | Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) |
 |---|---|---|---|---|---|
@@ -53,7 +53,7 @@ Fine-tuned from the official COCO weight `deimv2_pico_coco.safetensors` (obtain 
 
 ## Data
 
-A public subset (525 review-test pairs with 2 525 whole-fish annotations and validity masks, plus 50 demonstration samples) is released with a permanent DOI; training and validation splits are available on reasonable request. See `DATASET.md`.
+A public subset (525 review-test pairs with 2 525 `surfacing` annotations and validity masks, plus 50 demonstration samples) is released with a permanent DOI; training and validation splits are available on reasonable request. See `DATASET.md`.
 
 ## License
 

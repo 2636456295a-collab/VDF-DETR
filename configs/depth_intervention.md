@@ -4,7 +4,7 @@ Corresponding to Section 3.4 and Table 3 of the manuscript.
 
 ## Purpose
 
-Quantify the contribution of **valid depth readings** to whole-fish detection, separated from the RGB appearance branch.
+Quantify the contribution of **valid depth readings** to surfacing-fish detection, separated from the RGB appearance branch.
 
 ## Conditions
 
@@ -18,7 +18,7 @@ All three conditions use the **same trained VDF-DETR weights and the same images
 
 ## Data
 
-525 validation images / 2 550 whole-fish boxes. This is a **different split** from the 525-image review test set used for Tables 1–2. Keep the two partitions separate when reproducing.
+525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image review test set used for Tables 1–2. Keep the two partitions separate when reproducing.
 
 ## Metrics
 

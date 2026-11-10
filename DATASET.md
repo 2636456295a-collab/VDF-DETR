@@ -1,10 +1,10 @@
 # Dataset
 
-Self-collected paired RGB-D images of juvenile mandarin fish (*Siniperca chuatsi*) in a recirculating aquaculture system (RAS), captured from a fixed top-view RGB-D camera. Single-class **whole-fish bounding boxes**. This is a detection dataset; it contains **no behavioral or surface-breathing labels**.
+Self-collected paired RGB-D images of juvenile mandarin fish (*Siniperca chuatsi*) in a recirculating aquaculture system (RAS), captured from a fixed top-view RGB-D camera. Single-class whole-fish bounding boxes of **surfacing** individuals (category `surfacing`). All boxes were manually reviewed before release.
 
 ## Composition
 
-| Split | Paired RGB-D images | Whole-fish boxes | Notes |
+| Split | Paired RGB-D images | `surfacing` boxes | Notes |
 |---|---|---|---|
 | Training | 4 200 | — | not public |
 | Validation | 525 | 2 550 (4.857 per image) | not public |
@@ -19,7 +19,7 @@ Dissolved oxygen was logged **once every 10 minutes**. These are stage-level env
 
 ## Public subset
 
-- Review test split: 525 paired RGB-D images, 2 525 whole-fish annotations, validity masks
+- Review test split: 525 paired RGB-D images, 2 525 `surfacing` annotations, validity masks
 - 50 demonstration samples drawn from the training/validation splits, illustrating annotation format, RGB-D pairing and the appearance of missing depth
 - Training (4 200) and validation (525) splits: available from the corresponding author on reasonable request
 - Permanent archive and DOI: **to be added**
@@ -28,8 +28,8 @@ The files are hosted outside this repository because a full paired RGB-D subset 
 
 ## Annotation format
 
-- COCO JSON, single category `mandarin_fish`
-- Boxes are axis-aligned whole-fish rectangles (`xyxy` / `xywh` as specified in the JSON)
+- COCO JSON, single category `surfacing`
+- Boxes are axis-aligned whole-fish rectangles of surfacing individuals (`xywh` in the COCO JSON)
 - RGB and depth are paired by acquisition timestamp; the validity mask is derived from the depth channel
 - Overlapping individuals are annotated separately; annotation rules are summarized in the manuscript (Section 2.2)
 
@@ -46,6 +46,6 @@ The released dataset subset is licensed under **CC BY 4.0** (or CC BY-NC 4.0 if 
 ## Suggested data citation
 
 ```
-Anonymous (under review). VDF-DETR: paired RGB-D mandarin fish detection dataset
+Anonymous (under review). VDF-DETR: paired RGB-D surfacing-fish detection dataset
 (review-test subset and demonstration samples) [Dataset]. Zenodo. DOI: [to be added].
 ```

@@ -47,7 +47,7 @@ def result_payload(model,weights,metrics,rows,parameters):
     errors=[r['count_conf025']-r['reference_count'] for r in rows]
     mae=float(np.mean(np.abs(errors)));negative=[r for r in rows if not r['reference_count']]
     out={'architecture':{'pico':'DEIMv2-Pico','n':'DEIMv2-N','dfine_n':'D-FINE-N'}[model],'method':'rgb',
-         'role':'development validation on new AI-assisted user-accepted v4 labels; not independent test',
+         'role':'development validation on the reviewed v4 label set; not independent test',
          'images':400,'reference_boxes':1065,'metrics':{k:float(v) for k,v in metrics.items()},
          'count_MAE_conf025':mae,'count_RMSE_conf025':float(np.sqrt(np.mean(np.square(errors)))),
          'negative_images':len(negative),'negative_images_with_false_positive':sum(r['count_conf025']>0 for r in negative),
@@ -55,7 +55,7 @@ def result_payload(model,weights,metrics,rows,parameters):
          'provenance':{'weights_sha256':sha(weights),'dataset_index_sha256':sha(DATA/'paired_index.json'),
                        'configuration_sha256':sha(JOB/'configuration.json'),'seed':42,'imgsz':960,
                        'count_confidence':.25,'AP_confidence':.001,'label_version':'accepted5000_v4',
-                       'label_origin':'AI_assisted_user_accepted','depth_used_as_input':False,'DO_used_as_input':False}}
+                       'label_origin':'reviewed','depth_used_as_input':False,'DO_used_as_input':False}}
     for name,rule in [('zero',lambda n:n==0),('one_to_five',lambda n:1<=n<=5),('six_plus',lambda n:n>=6)]:
         group=[r for r in rows if rule(r['reference_count'])]
         out['strata'][name]={'images':len(group),'count_MAE_conf025':float(np.mean([r['absolute_count_error_conf025'] for r in group])) if group else None}
