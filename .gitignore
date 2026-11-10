@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- VDF-DETR: never commit data, weights or run outputs ----
+data/
+datasets/
+sample/
+runs/
+results/
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.csv
+*.parquet
+*.npz
+*.npy
+

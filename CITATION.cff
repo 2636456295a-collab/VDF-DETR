@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this code or the released dataset subset, please cite the accompanying article and the dataset DOI."
+title: "VDF-DETR: lightweight RGB-D fish detection in recirculating aquaculture"
+authors:
+  - name: "Anonymous (manuscript under double-blind review)"
+version: 1.0.0
+date-released: 2026-11-10
+license: MIT
+repository-code: "https://github.com/2636456295a-collab/VDF-DETR"
+keywords:
+  - RGB-D object detection
+  - mandarin fish
+  - recirculating aquaculture
+  - valid-depth fusion
+  - lightweight detector
+note: "Author identities and the dataset DOI will be filled in upon article acceptance."
