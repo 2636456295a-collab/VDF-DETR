@@ -38,7 +38,7 @@ Checkpoint selection is per-model by validation AP50–95, not by final epoch an
 
 Note that NMS IoU and P/R/F1 match IoU share the numeric value 0.50 but serve different functions. The Pico series is end-to-end; its 200-query cap is not an NMS setting.
 
-The unified evaluation recomputes every model with the same `score()` + COCO evaluation path (`tools/formal50_unified_eval.py`). Three sets of numbers in the manuscript are intentionally distinct and must not be compared directly: per-epoch validation peaks, the `unified_best_validation.csv` recomputation, and the review-test values in Table 1.
+The unified evaluation recomputes every model with the same `score()` + COCO evaluation path (`tools/formal50_unified_eval.py`). Three sets of numbers in the manuscript are intentionally distinct and must not be compared directly: per-epoch validation peaks, the `unified_best_validation.csv` recomputation, and the test values in Table 1.
 
 ## Reproducing
 
