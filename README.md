@@ -11,7 +11,7 @@ Unified test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
 |---|---|---|---|---|---|
 | VDF-DETR | 93.24 | 87.96 | 90.52 | 95.68 | 82.71 |
 
-Gains over the DEIMv2-Pico baseline: +2.90 / +3.17 / +3.04 / +1.32 / +2.21 percentage points respectively. The 15-model comparison and the 5-configuration ablation are reported in Tables 1–2 of the manuscript.
+Gains over the DEIMv2-Pico baseline: +2.90 / +3.17 / +3.04 / +1.32 / +2.21 percentage points respectively. The 12-model comparison and the 5-configuration ablation are reported in Tables 1–2 of the manuscript.
 
 ## Manuscript ↔ code mapping
 

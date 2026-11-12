@@ -1,6 +1,6 @@
 # Formal 50-epoch protocol
 
-Exact settings used for the 15-model comparison (Tables 1–2 of the manuscript). Values below are recorded by `src/formal_train.py` into each run's `cfgout` dictionary and can be cross-checked against the archived `results.csv`.
+Exact settings used for the 12-model comparison (Tables 1–2 of the manuscript). Values below are recorded by `src/formal_train.py` into each run's `cfgout` dictionary and can be cross-checked against the archived `results.csv`.
 
 ## Training
 
@@ -22,7 +22,7 @@ Exact settings used for the 15-model comparison (Tables 1–2 of the manuscript)
 | Weight selection | best.pth written **only** when validation `metrics/mAP50-95(B)` strictly improves; evaluation loads the EMA weights |
 | Initialization | official COCO `deimv2_pico_coco.safetensors`; **only the classification head reinitialized**; COCO tensors preserved; DEB/VGDF/RSA independently initialized |
 
-Checkpoint selection is per-model by validation AP50–95, not by final epoch and not by test-set performance. Best epochs range from 7 to 34 across the 15 models.
+Checkpoint selection is per-model by validation AP50–95, not by final epoch and not by test-set performance. Best epochs range from 7 to 34 across the reported models.
 
 ## Unified evaluation
 

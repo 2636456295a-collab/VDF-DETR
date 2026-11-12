@@ -33,7 +33,7 @@ The files are attached to the repository's `v1.0-testset` GitHub Release rather 
 
 - COCO JSON, single category `surfacing` (shipped in `annotations.zip` together with `test_images.txt` and format notes)
 - Boxes are axis-aligned whole-fish rectangles of surfacing individuals (`xywh` in the COCO JSON)
-- Surfacing individuals are identified from visible-surface cues in the RGB imagery; depth maps serve as the second input modality for detection and valid-depth fusion
+- Surfacing is a single class of whole-fish boxes denoting a behavioural state in which the fish body remains continuously close to the water surface, judged manually with reference to video; model training and inference use single-frame paired RGB-D images, with depth as an independent observation channel
 - RGB and depth are paired by acquisition timestamp; the validity mask is derived from the depth channel
 - Overlapping individuals are annotated separately; annotation rules are summarized in the manuscript (Section 2.2)
 
@@ -43,7 +43,7 @@ The released files contain only experiment-required fields. Author names, affili
 
 ## License
 
-The released dataset subset is licensed under **CC BY 4.0** (or CC BY-NC 4.0 if commercial use is to be excluded — final choice to be confirmed). Anyone reusing it must give appropriate credit, link the license and indicate changes.
+The released dataset subset is licensed under **CC BY 4.0**. Anyone reusing it must give appropriate credit, link the license and indicate changes.
 
 **The code in this repository is MIT-licensed; the MIT license does not apply to the data files.** The two licenses are deliberately separate.
 
