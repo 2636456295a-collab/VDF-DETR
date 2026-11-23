@@ -12,9 +12,11 @@ Quantify the contribution of **valid depth readings** to surfacing-fish detectio
 |---|---|---|
 | Normal | original aligned depth D | original M |
 | Depth removed | zeroed / invalid depth | all-invalid M |
-| Depth mismatched | depth maps shuffled across images | original M |
+| Depth mismatched | donor depth reassigned within the recording session | donor mask moves with depth |
 
-All three conditions use the **same trained VDF-DETR weights and the same images**; only the depth input is altered at inference time. No retraining is performed, so differences are attributable to the depth input itself.
+All three conditions use the **same trained VDF-DETR weights and the same images**; depth and its validity mask are altered at inference time. No retraining is performed, so differences are attributable to the depth input itself.
+
+For the mismatched condition, ten one-to-one pairings are generated within the recording session using seeds 43–52. Donor depth maps and masks move together; cyclic shifting prevents a frame from retaining its own depth. Results are reported as the mean and sample standard deviation.
 
 ## Data
 

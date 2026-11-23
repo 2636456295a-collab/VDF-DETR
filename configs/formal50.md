@@ -9,6 +9,7 @@ Exact settings used for the 12-model comparison (Table 2 of the manuscript). Val
 | Epochs | 50 (fixed, no early stopping) |
 | Input size | 960 × 960 |
 | Batch size | 16 |
+| Gradient accumulation | 1 |
 | Optimizer | AdamW (betas 0.9 / 0.999), backbone lr_scale 0.5 |
 | Initial lr | 2×10⁻⁴ |
 | Warmup | 2 epochs |
@@ -43,7 +44,8 @@ The unified evaluation recomputes every model with the same `score()` + COCO eva
 ## Reproducing
 
 ```bash
-python src/formal_train.py --model pico_ab_cspatial_control --epochs 50 --batch 16 --seed 42
+python src/formal_train.py --model pico_ab_cspatial_control --epochs 50 --batch 16 --accum 1 --seed 42
+# Validation recomputation; the test-set evaluation entry point is not yet included.
 python tools/formal50_unified_eval.py
 ```
 

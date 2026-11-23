@@ -34,7 +34,7 @@ VGDF concatenates the masked depth `D⊙M` with the binary validity mask `M` bef
 
 ```
 src/    model definition, A/B/C modules, data interface, standalone trainer
-tools/  unified evaluation on validation and test splits
+tools/  validation metric recomputation from available predictions
 configs/formal50.md            exact 50-epoch training and evaluation protocol
 configs/depth_intervention.md  depth-input intervention conditions (Section 3.3, Table 4)
 CITATION.cff                   citation metadata
