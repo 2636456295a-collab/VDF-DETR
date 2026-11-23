@@ -50,3 +50,11 @@ python tools/formal50_unified_eval.py
 ```
 
 Model keys and their manuscript names are listed in the README mapping table. Set `GUIYU_ROOT`, `FORMAL_DATA` and `FORMAL_EVAL_OUTPUT` and adjust the machine-specific `ROOT` / `WORK` constants in the scripts before running; see `src/OVERVIEW.md`.
+
+## Test metrics from saved predictions
+
+`tools/evaluate_test_predictions.py` computes P/R/F1 and COCO AP on the 525-image, 2,525-box test references from saved prediction records. It requires `pycocotools`, an image-ID to xyxy reference-box JSON mapping, and a JSON list of per-image prediction records with `id`, `width`, `height`, and `predictions` entries containing `xyxy` and `confidence`. Supply the confidence selected on validation, for example 0.45 for VDF-DETR. This tool evaluates saved predictions; it does not run inference or convert the released COCO annotations.
+
+```bash
+python tools/evaluate_test_predictions.py --predictions predictions.json --references test_reference_2525.json --confidence 0.45
+```
