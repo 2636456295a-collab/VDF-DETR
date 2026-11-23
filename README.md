@@ -11,7 +11,7 @@ Unified test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
 |---|---|---|---|---|---|
 | VDF-DETR | 93.24 | 87.96 | 90.52 | 95.68 | 82.71 |
 
-Gains over the DEIMv2-Pico baseline: +2.90 / +3.17 / +3.04 / +1.32 / +2.21 percentage points respectively. The 12-model comparison and the 5-configuration ablation are reported in Tables 1–2 of the manuscript.
+Gains over the DEIMv2-Pico baseline: +2.90 / +3.17 / +3.04 / +1.32 / +2.21 percentage points respectively. The 12-model comparison and the 5-configuration ablation are reported in Table 2 and Table 3 of the manuscript, respectively.
 
 ## Manuscript ↔ code mapping
 
@@ -36,9 +36,8 @@ VGDF concatenates the masked depth `D⊙M` with the binary validity mask `M` bef
 src/    model definition, A/B/C modules, data interface, standalone trainer
 tools/  unified evaluation on validation and test splits
 configs/formal50.md            exact 50-epoch training and evaluation protocol
-configs/depth_intervention.md  depth-input intervention conditions (Section 3.4)
-DATASET.md                     data composition, public subset, annotation format, license
-CITATION.cff          citation metadata
+configs/depth_intervention.md  depth-input intervention conditions (Section 3.3, Table 4)
+CITATION.cff                   citation metadata
 ```
 
 See `src/OVERVIEW.md` for a per-file description and the machine-specific path constants that need adjusting before running.
@@ -53,11 +52,11 @@ Fine-tuned from the official COCO weight `deimv2_pico_coco.safetensors` (obtain 
 
 ## Data
 
-The test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. The three splits are separated by recording session, with the test subset drawn from a separate acquisition day. See `DATASET.md`.
+The test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. The three splits are separated by recording session, with the test subset drawn from a separate acquisition day.
 
 ## License
 
-Code: **MIT** (see `LICENSE`). Dataset subset: **CC BY 4.0** (see `DATASET.md`). The two licenses are separate; the MIT license does not cover the released data files.
+Code: **MIT** (see `LICENSE`). Dataset subset: **CC BY 4.0**. The two licenses are separate; the MIT license does not cover the released data files.
 
 ## Citation
 

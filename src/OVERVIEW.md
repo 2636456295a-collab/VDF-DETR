@@ -23,7 +23,7 @@ The scripts were written for two machines and contain hard-coded roots:
 - local: `F:/GUIYU` and `ROOT = Path(__file__).resolve().parents[1]`
 - cloud: `/home/waas/GUIYU`, `GUIYU_ROOT`, `FORMAL_DATA`, `FORMAL_EVAL_OUTPUT`
 
-Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. No dataset images, annotations or pretrained weights are shipped in this repository; obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release and prepare the paired RGB-D dataset as described in `DATASET.md`.
+Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. No dataset images, annotations or pretrained weights are shipped in this repository; obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release and prepare the paired RGB-D dataset as summarized in the README and described in the manuscript.
 
 ## Dependencies
 

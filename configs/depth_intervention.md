@@ -1,6 +1,6 @@
 # Depth-input intervention protocol
 
-Corresponding to Section 3.4 and Table 3 of the manuscript.
+Corresponding to Section 3.3 and Table 4 of the manuscript.
 
 ## Purpose
 
@@ -18,7 +18,7 @@ All three conditions use the **same trained VDF-DETR weights and the same images
 
 ## Data
 
-525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image test set used for Tables 1–2. Keep the two partitions separate when reproducing.
+525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image test set used for Table 2. Keep the two partitions separate when reproducing.
 
 ## Metrics
 
