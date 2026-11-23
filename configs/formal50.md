@@ -33,7 +33,7 @@ Checkpoint selection is per-model by validation AP50–95, not by final epoch an
 | YOLO `max_det` | 300 |
 | YOLO confidence floor | 0.001 |
 | DEIMv2-Pico series | end-to-end, 200-query output cap per image (not YOLO NMS) |
-| P/R/F1 confidence | **per-model F1-optimal threshold**, range 0.25–0.90 (not a single fixed 0.50) |
+| P/R/F1 confidence | **per-model F1-optimal threshold**, range 0.05–0.90 (step 0.05) (not a single fixed 0.50) |
 | P/R/F1 match IoU | 0.50 |
 
 Note that NMS IoU and P/R/F1 match IoU share the numeric value 0.50 but serve different functions. The Pico series is end-to-end; its 200-query cap is not an NMS setting.

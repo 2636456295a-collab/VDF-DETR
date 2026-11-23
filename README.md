@@ -44,7 +44,7 @@ See `src/OVERVIEW.md` for a per-file description and the machine-specific path c
 
 ## Training and evaluation
 
-All protocol values (50 epochs, 960² input, batch 16, AdamW, lr₀ = 2×10⁻⁴, 2-epoch warmup, epoch-wise linear decay to 5%, weight decay 10⁻⁴, seed 42, EMA 0.9999, selection by validation AP50–95) are recorded in `configs/formal50.md`. Evaluation uses COCO `maxDets = [1, 10, 300]`; for YOLO models NMS IoU = 0.50, `max_det = 300`, confidence floor 0.001; DEIMv2-Pico series are end-to-end with a 200-query output cap; P/R/F1 use per-model F1-optimal confidence thresholds (0.25–0.90) at match IoU 0.50.
+All protocol values (50 epochs, 960² input, batch 16, AdamW, lr₀ = 2×10⁻⁴, 2-epoch warmup, epoch-wise linear decay to 5%, weight decay 10⁻⁴, seed 42, EMA 0.9999, selection by validation AP50–95) are recorded in `configs/formal50.md`. Evaluation uses COCO `maxDets = [1, 10, 300]`; for YOLO models NMS IoU = 0.50, `max_det = 300`, confidence floor 0.001; DEIMv2-Pico series are end-to-end with a 200-query output cap; P/R/F1 use per-model F1-optimal confidence thresholds (0.05–0.90 (step 0.05)) at match IoU 0.50.
 
 ## Initialization
 

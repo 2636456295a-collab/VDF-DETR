@@ -22,8 +22,8 @@ All three conditions use the **same trained VDF-DETR weights and the same images
 
 ## Metrics
 
-P, R, F1, AP50 and AP50–95 computed with the same unified `score()` and COCO evaluation path used for the main comparison (`tools/formal50_unified_eval.py`). Per-model F1-optimal confidence thresholds are reused, and matching IoU is 0.50.
+P, R, F1, AP50 and AP50–95 computed with the same unified `score()` and COCO evaluation path used for the main comparison (`tools/formal50_unified_eval.py`). Confidence was fixed at 0.50 and matching IoU was 0.50.
 
 ## Reported outcome
 
-The normal-depth condition raises recall by **4.63 percentage points** over the depth-removed condition, while the mismatched condition falls back. This supports the interpretation that VGDF uses valid depth to recover missed detections rather than merely responding to an additional input channel.
+The normal-depth condition raises recall by **3.80 percentage points** over the depth-removed condition, while the mismatched condition falls back. This supports the interpretation that VGDF uses valid depth to recover missed detections rather than merely responding to an additional input channel.
