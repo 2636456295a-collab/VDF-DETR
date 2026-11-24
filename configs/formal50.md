@@ -53,8 +53,8 @@ Model keys and their manuscript names are listed in the README mapping table. Se
 
 ## Test metrics from saved predictions
 
-`tools/evaluate_test_predictions.py` computes P/R/F1 and COCO AP on the 525-image, 2,521-box paper test references from saved prediction records. It requires `pycocotools`, an image-ID to xyxy reference-box JSON mapping, and a JSON list of per-image prediction records with `id`, `width`, `height`, and `predictions` entries containing `xyxy` and `confidence`. The paper tables use confidence 0.50. This tool evaluates saved predictions; it does not run inference or convert the released COCO annotations.
+`tools/evaluate_test_predictions.py` computes P/R/F1 and COCO AP on the 525-image, 2,521-box paper test references from saved prediction records. It requires `pycocotools`, an image-ID to xyxy reference-box JSON mapping, and a JSON list of per-image prediction records with `id`, `width`, `height`, and `predictions` entries containing `xyxy` and `confidence`. The paper tables use confidence 0.50. Request the test reference annotations from the authors. This tool evaluates saved predictions; it does not run inference or convert COCO annotations.
 
 ```bash
-python tools/evaluate_test_predictions.py --predictions predictions.json --references data/test_reference_2521.json --confidence 0.50
+python tools/evaluate_test_predictions.py --predictions predictions.json --references /path/to/test_reference_2521.json --confidence 0.50
 ```
