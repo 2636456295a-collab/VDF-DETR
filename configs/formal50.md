@@ -1,6 +1,6 @@
 # Formal 50-epoch protocol
 
-Pico-series settings supporting the 12-model comparison and ablation study (Tables 3 and 4 of the manuscript). Values below can be cross-checked against the run configuration and archived `results.csv`.
+Pico-series training and evaluation settings for the 12-model comparison and ablation study (Tables 3 and 4 of the manuscript).
 
 ## Training
 
@@ -13,13 +13,13 @@ Pico-series settings supporting the 12-model comparison and ablation study (Tabl
 | Optimizer | AdamW (betas 0.9 / 0.999), backbone lr_scale 0.5 |
 | Initial lr | 2×10⁻⁴ |
 | Warmup | 2 epochs |
-| LR schedule | epoch-wise **linear** decay to 5% of lr₀ (not cosine) |
+| LR schedule | epoch-wise linear decay to 5% of lr₀ |
 | Weight decay | 1×10⁻⁴ |
 | Gradient clipping | 10.0 |
 | EMA | decay 0.9999, 2000 warmup steps |
 | Seed | 42 (torch / random / numpy) |
 | AMP | off |
-| Augmentation | no mosaic / mixup / cutmix / HSV / geometric augmentation; only horizontal flip (p = 0.5) |
+| Augmentation | horizontal flip (p = 0.5); mosaic, mixup, cutmix, HSV and other geometric augmentations disabled |
 | Weight selection | best.pth written **only** when validation `metrics/mAP50-95(B)` strictly improves; evaluation loads the EMA weights |
 | Initialization | official COCO `deimv2_pico_coco.safetensors`; **only the classification head reinitialized**; COCO tensors preserved; DEB/VGDF/RSA independently initialized |
 
@@ -45,7 +45,7 @@ The manuscript reports test results using the same matching and COCO evaluation 
 
 ```bash
 python src/formal_train.py --model pico_ab_cspatial_control --epochs 50 --batch 16 --accum 1 --seed 42
-# Validation recomputation; the test-set evaluation entry point is not yet included.
+# Recompute validation metrics. For test metrics from saved predictions, see the command below.
 python tools/formal50_unified_eval.py
 ```
 
