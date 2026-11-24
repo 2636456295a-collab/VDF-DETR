@@ -1,9 +1,9 @@
-# VDF-DETR: RGB-D detection and spatial analysis of surfacing mandarin fish
+# VDF-DETR: RGB-D detection and spatial analysis of surfacing mandarin fish under declining dissolved oxygen
 
 VDF-DETR is a lightweight RGB-D detector for surfacing mandarin fish (*Siniperca chuatsi*) in recirculating aquaculture. Built on DEIMv2-Pico, it combines three complementary components:
 
 - **DEB — detail enhancement branch:** integrates shallow visual features to preserve fish contours and fine details.
-- **VGDF — validity-gated depth fusion:** uses a local depth-validity mask to weight depth features during RGB-D fusion.
+- **VGDF — validity-gated depth fusion:** weights depth features according to the local proportion of valid-range depth readings during RGB-D fusion.
 - **RSA — residual spatial attention:** recalibrates the fused representation at spatial locations relevant to detection.
 
 ## Detection performance
@@ -39,7 +39,7 @@ VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over
 | Pico + DEB + direct depth + RSA | 92.47 | 87.62 | 89.98 | 95.44 | 82.29 |
 | **VDF-DETR** | **95.00** | 85.92 | **90.23** | **95.64** | **82.67** |
 
-With DEB and RSA retained, VGDF improves AP50–95 by 0.38 points compared with direct depth fusion.
+With DEB and RSA retained, VGDF improves precision by 2.53 percentage points and AP50–95 by 0.38 points compared with direct depth fusion. The fraction of detections that are false positives (1 − precision) decreases from 7.53% to 5.00%; recall is 85.92% versus 87.62% for direct fusion.
 
 ## Depth-input comparison
 
@@ -61,7 +61,7 @@ Spatial and temporal analyses used manually annotated frames from the training a
 
 The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. Training and validation data are available from the authors on reasonable request.
 
-The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). Download [`annotations_2521.zip`](https://github.com/2636456295a-collab/VDF-DETR/releases/download/v1.0-testset/annotations_2521.zip) for the paper's COCO-format test annotations. Its SHA-256 is `9a4813d62b68ec658b7590abaa7c97298350abf2f8b320bdcb092a1a9d825199`. The earlier `annotations.zip` asset contains 2,525 boxes.
+The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). Download [`annotations_2521.zip`](https://github.com/2636456295a-collab/VDF-DETR/releases/download/v1.0-testset/annotations_2521.zip) for the paper's COCO-format test annotations. Its SHA-256 is `9a4813d62b68ec658b7590abaa7c97298350abf2f8b320bdcb092a1a9d825199`. For version traceability, the earlier `annotations.zip` asset contains 2,525 boxes; the 2,521-box version is the reference for the reported paper results.
 
 The same 2,521 paper reference boxes are also available as [`data/test_reference_2521.json`](data/test_reference_2521.json), which maps each image ID to a list of `[x1, y1, x2, y2]` reference boxes in pixel coordinates.
 
