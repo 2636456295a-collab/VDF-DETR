@@ -5,7 +5,7 @@ These are the original research scripts used for the formal 50-epoch experiments
 | File | Role |
 |---|---|
 | `wall20_models_v1.py` | A/B module definitions and model builder. `Encoder.fuse()` implements DEB (`use_detail`) and VGDF (`depth_mode='mask'`), including the `[D⊙M, M]` concatenation and valid-depth-ratio gate. |
-| `models_spatial.py` | RSA (`ResidualSpatialAttention`, 99 parameters, γ = 0) and the VDF-DETR builder. Contains self-checks asserting the C module is an identity transform at initialization, preserves A/B tensors and RNG streams exactly, and that no `quality_gate` exists. Asserts total parameters = 1 542 854. |
+| `models_spatial.py` | RSA (`ResidualSpatialAttention`, 99 parameters, γ = 0) and the VDF-DETR builder. Contains self-checks for initialization and parameter count. |
 | `short20_deim_core.py` | DEIMv2-Pico baseline adapter: official model/criterion loading, decoding (confidence floor 0.001), 200-query output cap, data/target conversion. |
 | `short20_common.py` | Shared IO, retry and job utilities. |
 | `formal_train.py` | Standalone trainer reproducing the exact loop (AdamW, backbone lr_scale 0.5, EMA 0.9999 / 2000 warmups, epoch-wise linear decay, clip 10, fliplr 0.5) without the legacy queue dependencies. Writes the full hyperparameter record into each run's config. |
@@ -14,7 +14,7 @@ These are the original research scripts used for the formal 50-epoch experiments
 
 ## Internal keys
 
-`SPECS` in `wall20_models_v1.py` defines `pico`, `pico_a`, `pico_b`, `pico_ab`, `pico_a_depth`, `pico_a_mask`. The final configurations are registered in `models_spatial.py` (`pico_ab_cspatial_control`) and in the training/evaluation scripts (`pico_b_mask`, `pico_a`, `pico_a_mask`). **Keys containing `quality` refer to earlier exploratory gated variants and are not part of the reported results.**
+`SPECS` in `wall20_models_v1.py` defines `pico`, `pico_a`, `pico_b`, `pico_ab`, `pico_a_depth`, `pico_a_mask`. The paper configurations are registered in `models_spatial.py` (`pico_ab_cspatial_control`) and in the training/evaluation scripts (`pico_b_mask`, `pico_a`, `pico_a_mask`).
 
 ## Path dependencies
 

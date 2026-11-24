@@ -35,7 +35,7 @@ def score(rows, threshold):
 parser = argparse.ArgumentParser()
 parser.add_argument('--predictions', required=True, help='JSON list of per-image prediction records')
 parser.add_argument('--references', required=True, help='JSON mapping image IDs to xyxy reference boxes')
-parser.add_argument('--confidence', required=True, type=float, help='confidence selected on validation')
+parser.add_argument('--confidence', required=True, type=float, help='confidence threshold, 0.50 for the paper tables')
 args = parser.parse_args()
 with open(args.predictions, encoding='utf-8-sig') as f:
     rows = json.load(f)
@@ -43,7 +43,7 @@ with open(args.references, encoding='utf-8-sig') as f:
     references = json.load(f)
 assert len(rows) == 525 and len(references) == 525
 assert len({r['id'] for r in rows}) == 525 and set(references) == {r['id'] for r in rows}
-assert sum(map(len, references.values())) == 2525
+assert sum(map(len, references.values())) == 2521, 'Expected the 2,521-box paper test references'
 gt = {'info': {}, 'images': [], 'annotations': [], 'categories': [{'id': 1, 'name': 'surfacing'}]}
 predictions = []
 for i, row in enumerate(rows, 1):

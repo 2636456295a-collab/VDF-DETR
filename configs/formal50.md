@@ -1,6 +1,6 @@
 # Formal 50-epoch protocol
 
-Exact settings used for the 12-model comparison (Table 2 of the manuscript). Values below are recorded by `src/formal_train.py` into each run's `cfgout` dictionary and can be cross-checked against the archived `results.csv`.
+Pico-series settings supporting the 12-model comparison and ablation study (Tables 3 and 4 of the manuscript). Values below can be cross-checked against the run configuration and archived `results.csv`.
 
 ## Training
 
@@ -23,7 +23,7 @@ Exact settings used for the 12-model comparison (Table 2 of the manuscript). Val
 | Weight selection | best.pth written **only** when validation `metrics/mAP50-95(B)` strictly improves; evaluation loads the EMA weights |
 | Initialization | official COCO `deimv2_pico_coco.safetensors`; **only the classification head reinitialized**; COCO tensors preserved; DEB/VGDF/RSA independently initialized |
 
-Checkpoint selection is per-model by validation AP50–95, not by final epoch and not by test-set performance. Best epochs range from 7 to 34 across the reported models.
+Pico-series checkpoint selection is based on validation AP50–95.
 
 ## Unified evaluation
 
@@ -34,12 +34,12 @@ Checkpoint selection is per-model by validation AP50–95, not by final epoch an
 | YOLO `max_det` | 300 |
 | YOLO confidence floor | 0.001 |
 | DEIMv2-Pico series | end-to-end, 200-query output cap per image (not YOLO NMS) |
-| P/R/F1 confidence | **per-model F1-optimal threshold**, range 0.05–0.90 (step 0.05) (not a single fixed 0.50) |
+| P/R/F1 confidence | 0.50 for the test results in Tables 3 and 4 |
 | P/R/F1 match IoU | 0.50 |
 
 Note that NMS IoU and P/R/F1 match IoU share the numeric value 0.50 but serve different functions. The Pico series is end-to-end; its 200-query cap is not an NMS setting.
 
-The unified evaluation recomputes every model with the same `score()` + COCO evaluation path (`tools/formal50_unified_eval.py`). Three sets of numbers in the manuscript are intentionally distinct and must not be compared directly: per-epoch validation peaks, the `unified_best_validation.csv` recomputation, and the test values in Table 2.
+The manuscript reports test results using the same matching and COCO evaluation definitions across models. The repository also contains validation evaluation utilities.
 
 ## Reproducing
 
@@ -53,8 +53,8 @@ Model keys and their manuscript names are listed in the README mapping table. Se
 
 ## Test metrics from saved predictions
 
-`tools/evaluate_test_predictions.py` computes P/R/F1 and COCO AP on the 525-image, 2,525-box test references from saved prediction records. It requires `pycocotools`, an image-ID to xyxy reference-box JSON mapping, and a JSON list of per-image prediction records with `id`, `width`, `height`, and `predictions` entries containing `xyxy` and `confidence`. Supply the confidence selected on validation, for example 0.45 for VDF-DETR. This tool evaluates saved predictions; it does not run inference or convert the released COCO annotations.
+`tools/evaluate_test_predictions.py` computes P/R/F1 and COCO AP on the 525-image, 2,521-box paper test references from saved prediction records. It requires `pycocotools`, an image-ID to xyxy reference-box JSON mapping, and a JSON list of per-image prediction records with `id`, `width`, `height`, and `predictions` entries containing `xyxy` and `confidence`. The paper tables use confidence 0.50. This tool evaluates saved predictions; it does not run inference or convert the released COCO annotations.
 
 ```bash
-python tools/evaluate_test_predictions.py --predictions predictions.json --references test_reference_2525.json --confidence 0.45
+python tools/evaluate_test_predictions.py --predictions predictions.json --references data/test_reference_2521.json --confidence 0.50
 ```

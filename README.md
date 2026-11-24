@@ -1,63 +1,62 @@
 # VDF-DETR
-> **Status:** code accompanying a manuscript currently under double-blind peer review. Author names and affiliations are intentionally omitted and will be added on acceptance.
 
-Official implementation of **VDF-DETR**, a lightweight RGB-D detector for single-class surfacing-fish detection in recirculating aquaculture systems (RAS). VDF-DETR extends **DEIMv2-Pico** with three modules: **DEB** (detail enhancement branch), **VGDF** (valid-depth fusion) and **RSA** (residual spatial attention), reaching **1.54 M parameters / 12.54 GFLOPs**.
+VDF-DETR is a lightweight RGB-D detector for surfacing mandarin fish (*Siniperca chuatsi*) in recirculating aquaculture. Built on DEIMv2-Pico, it combines three complementary components:
 
-## Main results
+- **DEB — detail enhancement branch:** integrates shallow visual features to preserve fish contours and fine details.
+- **VGDF — validity-gated depth fusion:** uses a local depth-validity mask to weight depth features during RGB-D fusion.
+- **RSA — residual spatial attention:** recalibrates the fused representation at spatial locations relevant to detection.
 
-Unified test set (525 paired RGB-D images, 2 525 `surfacing` boxes):
+## Detection performance
 
-| Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) |
-|---|---|---|---|---|---|
-| VDF-DETR | 93.24 | 87.96 | 90.52 | 95.68 | 82.71 |
+The test set contains 525 paired RGB-D images of a replacement fish group recorded on a separate day in the same system. Results use the paper's 2,521 reference boxes. Precision, recall and F1 use confidence 0.50 and matching IoU 0.50; AP follows COCO-style evaluation with up to 300 detections per image.
 
-Gains over the DEIMv2-Pico baseline: +2.90 / +3.17 / +3.04 / +1.32 / +2.21 percentage points respectively. The 12-model comparison and the 5-configuration ablation are reported in Table 2 and Table 3 of the manuscript, respectively.
+| Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) | Parameters (M) | GFLOPs | FPS |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| DEIMv2-Pico | 90.17 | 84.77 | 87.38 | 94.32 | 80.50 | 1.49 | 11.49 | 75.55 |
+| **VDF-DETR** | **95.00** | **85.92** | **90.23** | **95.64** | **82.67** | 1.54 | 12.54 | 68.05 |
 
-## Manuscript ↔ code mapping
+VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over the baseline, with 0.05 million additional parameters. FPS measures model forward passes on an NVIDIA GeForce RTX 4090 D with FP32, a batch size of one, and 960 × 960 input already on the GPU.
 
-The experiment scripts use internal configuration keys. This table maps them to the names used in the paper.
+## Ablation study
 
-| Manuscript | Experiment key | Implementation |
-|---|---|---|
-| **VDF-DETR** | `pico_ab_cspatial_control` | `src/models_spatial.py` + `src/wall20_models_v1.py` |
-| DEIMv2-Pico (baseline) | `pico` | `src/short20_deim_core.py::make_model` |
-| Pico + DEB | `pico_a` | `src/wall20_models_v1.py` |
-| Pico + VGDF | `pico_b_mask` | `src/wall20_models_v1.py` |
-| Pico + DEB + VGDF | `pico_a_mask` | `src/wall20_models_v1.py` |
-| DEB | `use_detail=True` | shallow detail residual, `wall20_models_v1.py` L29–31, L40 |
-| VGDF | `depth_mode='mask'` | `[D⊙M, M]` encoded by `depth_branch`, `wall20_models_v1.py` L41–52 |
-| RSA | `ResidualSpatialAttention` | 99 parameters, γ initialized to 0, `models_spatial.py` L12–20 |
+| Configuration | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) |
+|---|---:|---:|---:|---:|---:|
+| DEIMv2-Pico | 90.17 | 84.77 | 87.38 | 94.32 | 80.50 |
+| Pico + direct depth | 90.24 | 84.73 | 87.40 | 94.42 | 80.59 |
+| Pico + VGDF | 89.91 | 85.16 | 87.47 | 94.01 | 80.43 |
+| Pico + DEB | 91.35 | 87.50 | 89.38 | 95.07 | 82.37 |
+| Pico + DEB + VGDF | 94.19 | 86.12 | 89.97 | 95.55 | 82.60 |
+| Pico + DEB + direct depth + RSA | 92.47 | 87.62 | 89.98 | 95.44 | 82.29 |
+| **VDF-DETR** | **95.00** | 85.92 | **90.23** | **95.64** | **82.67** |
 
-VGDF concatenates the masked depth `D⊙M` with the binary validity mask `M` before the lightweight depth encoder, and uses the valid-depth ratio as the fusion gate. RSA applies `F·(1 + tanh(γ)·(2σ(conv₇([mean_c(F), max_c(F)])) − 1))` after the A+B fusion. The final VDF-DETR has **no `quality_gate`** (asserted in `models_spatial.py`); the `quality` branches (`pico_b`, `pico_ab`) are earlier exploratory variants and are **not** used in the reported results.
+With DEB and RSA retained, VGDF improves AP50–95 by 0.38 points compared with direct depth fusion. In fixed-weight validation interventions, aligned depth improves F1 from 89.89% to 91.21% compared with zeroed depth and mask; see [`configs/depth_intervention.md`](configs/depth_intervention.md).
 
-## Repository layout
+## Dataset and evaluation
 
+The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. Training and validation data are available from the authors on reasonable request.
+
+The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). The release's accompanying COCO annotation file contains 2,525 boxes; use [`data/test_reference_2521.json`](data/test_reference_2521.json) for the 2,521-box evaluation reported above. The JSON maps each image ID to a list of `[x1, y1, x2, y2]` reference boxes in pixel coordinates.
+
+To evaluate saved prediction records against the paper's references:
+
+```bash
+python tools/evaluate_test_predictions.py --predictions predictions.json --references data/test_reference_2521.json --confidence 0.50
 ```
-src/    model definition, A/B/C modules, data interface, standalone trainer
-tools/  validation metric recomputation from available predictions
-configs/formal50.md            exact 50-epoch training and evaluation protocol
-configs/depth_intervention.md  depth-input intervention conditions (Section 3.3, Table 4)
-CITATION.cff                   citation metadata
-```
 
-See `src/OVERVIEW.md` for a per-file description and the machine-specific path constants that need adjusting before running.
+The command requires `pycocotools` and saved prediction records in the format described in [`configs/formal50.md`](configs/formal50.md). It evaluates saved predictions; the command does not itself generate predictions or train a model.
 
-## Training and evaluation
+## Implementation
 
-All protocol values (50 epochs, 960² input, batch 16, AdamW, lr₀ = 2×10⁻⁴, 2-epoch warmup, epoch-wise linear decay to 5%, weight decay 10⁻⁴, seed 42, EMA 0.9999, selection by validation AP50–95) are recorded in `configs/formal50.md`. Evaluation uses COCO `maxDets = [1, 10, 300]`; for YOLO models NMS IoU = 0.50, `max_det = 300`, confidence floor 0.001; DEIMv2-Pico series are end-to-end with a 200-query output cap; P/R/F1 use per-model F1-optimal confidence thresholds (0.05–0.90 (step 0.05)) at match IoU 0.50.
+| Component | Configuration / implementation |
+|---|---|
+| VDF-DETR | `pico_ab_cspatial_control`; `src/models_spatial.py`, `src/wall20_models_v1.py` |
+| DEIMv2-Pico | `pico`; `src/short20_deim_core.py` |
+| DEB | `use_detail=True`; `src/wall20_models_v1.py` |
+| VGDF | `depth_mode='mask'`; `src/wall20_models_v1.py` |
+| RSA | `ResidualSpatialAttention`; `src/models_spatial.py` |
 
-## Initialization
+The Pico-series configurations use COCO-pretrained DEIMv2-Pico initialization, 960 × 960 inputs, and checkpoint selection based on validation AP50–95. For training configuration and evaluation details see [`configs/formal50.md`](configs/formal50.md) and [`src/OVERVIEW.md`](src/OVERVIEW.md).
 
-Fine-tuned from the official COCO weight `deimv2_pico_coco.safetensors` (obtain from upstream; not redistributed here). Only the classification head is reinitialized; all COCO backbone tensors are preserved bit-for-bit. DEB/VGDF/RSA are independently initialized, so all 15 compared models have explicitly documented initialization sources.
+## License and citation
 
-## Data
-
-The test subset (525 paired RGB-D images, 2 525 `surfacing` annotations, depth maps and validity masks) is attached to the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); training and validation splits are available on reasonable request. The three splits are separated by recording session, with the test subset drawn from a separate acquisition day.
-
-## License
-
-Code: **MIT** (see `LICENSE`). Dataset subset: **CC BY 4.0**. The two licenses are separate; the MIT license does not cover the released data files.
-
-## Citation
-
-The article is under review. Until publication, please cite this repository and the dataset DOI (to be added). A `CITATION.cff` is provided.
+Code is provided under the [MIT license](LICENSE). The released dataset subset is CC BY 4.0. Please cite the repository when using the code or data; article citation details will be added when available. See [`CITATION.cff`](CITATION.cff).

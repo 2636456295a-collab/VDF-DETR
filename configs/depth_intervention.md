@@ -1,6 +1,6 @@
 # Depth-input intervention protocol
 
-Corresponding to Section 3.3 and Table 4 of the manuscript.
+Corresponding to Sections 2.5 and 3.3 and Table 5 of the manuscript.
 
 ## Purpose
 
@@ -20,7 +20,7 @@ For the mismatched condition, ten one-to-one pairings are generated within the r
 
 ## Data
 
-525 validation images / 2 550 `surfacing` boxes. This is a **different split** from the 525-image test set used for Table 2. Keep the two partitions separate when reproducing.
+525 validation images / 2 550 `surfacing` boxes. The 525-image test set is used for the comparisons in Tables 3 and 4.
 
 ## Metrics
 
