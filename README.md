@@ -1,4 +1,4 @@
-# VDF-DETR
+# VDF-DETR: RGB-D detection and spatial analysis of surfacing mandarin fish
 
 VDF-DETR is a lightweight RGB-D detector for surfacing mandarin fish (*Siniperca chuatsi*) in recirculating aquaculture. Built on DEIMv2-Pico, it combines three complementary components:
 
@@ -13,9 +13,19 @@ The test set contains 525 paired RGB-D images of a replacement fish group record
 | Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) | Parameters (M) | GFLOPs | FPS |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | DEIMv2-Pico | 90.17 | 84.77 | 87.38 | 94.32 | 80.50 | 1.49 | 11.49 | 75.55 |
-| **VDF-DETR** | **95.00** | **85.92** | **90.23** | **95.64** | **82.67** | 1.54 | 12.54 | 68.05 |
+| YOLOv8n | 90.09 | 83.66 | 86.75 | 92.18 | 73.84 | 3.01 | 18.43 | 166.11 |
+| YOLOv10n | 82.38 | 76.79 | 79.49 | 88.35 | 71.07 | 2.71 | 19.19 | 100.89 |
+| YOLO11n | 82.92 | 82.03 | 82.47 | 90.45 | 72.95 | 2.59 | 14.80 | 116.30 |
+| YOLO12n | 70.79 | 84.29 | 76.95 | 88.02 | 71.06 | 2.57 | 19.55 | 73.40 |
+| D-FINE-N | 78.54 | 85.36 | 81.81 | 90.81 | 77.77 | 3.73 | 15.92 | 65.55 |
+| RT-DETRv2-S | 75.35 | 91.79 | 82.76 | 92.18 | 75.61 | 20.08 | 135.95 | 90.70 |
+| Faster R-CNN | 68.36 | 86.31 | 76.30 | 86.09 | 69.72 | 41.35 | 375.08 | 68.75 |
+| RetinaNet | 72.71 | 75.45 | 74.05 | 79.58 | 63.54 | 32.22 | 366.88 | 72.10 |
+| RT-DETR-R18 | 79.04 | 93.18 | 85.53 | 93.78 | 76.94 | 20.08 | 135.95 | 69.72 |
+| Deformable DETR | 92.22 | 74.30 | 82.29 | 92.14 | 73.13 | 40.05 | 351.87 | 33.57 |
+| **VDF-DETR** | **95.00** | 85.92 | **90.23** | **95.64** | **82.67** | 1.54 | 12.54 | 68.05 |
 
-VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over the baseline, with 0.05 million additional parameters. FPS measures model forward passes on an NVIDIA GeForce RTX 4090 D with FP32, a batch size of one, and 960 × 960 input already on the GPU.
+VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over the baseline, with 0.05 million additional parameters. FPS measures 40 model forward passes after 10 warm-up passes on an NVIDIA GeForce RTX 4090 D with FP32, a batch size of one, and 960 × 960 input already on the GPU. VDF-DETR uses RGB-D inputs; the other listed detectors use RGB inputs.
 
 ## Ablation study
 
@@ -29,13 +39,31 @@ VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over
 | Pico + DEB + direct depth + RSA | 92.47 | 87.62 | 89.98 | 95.44 | 82.29 |
 | **VDF-DETR** | **95.00** | 85.92 | **90.23** | **95.64** | **82.67** |
 
-With DEB and RSA retained, VGDF improves AP50–95 by 0.38 points compared with direct depth fusion. In fixed-weight validation interventions, aligned depth improves F1 from 89.89% to 91.21% compared with zeroed depth and mask; see [`configs/depth_intervention.md`](configs/depth_intervention.md).
+With DEB and RSA retained, VGDF improves AP50–95 by 0.38 points compared with direct depth fusion.
+
+## Depth-input comparison
+
+The same VDF-DETR checkpoint was evaluated with three depth-input conditions on the validation split:
+
+| Condition | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) |
+|---|---:|---:|---:|---:|---:|
+| Aligned depth | 92.71 | 89.76 | 91.21 | 96.18 | 84.69 |
+| Depth and mask zeroed | 94.20 | 85.96 | 89.89 | 95.49 | 83.43 |
+| Mismatched depth | 92.99 ± 0.14 | 88.75 ± 0.16 | 90.82 ± 0.10 | 95.93 ± 0.03 | 84.35 ± 0.05 |
+
+Mismatched values are the mean ± sample standard deviation over ten pairings. See [`configs/depth_intervention.md`](configs/depth_intervention.md) for the protocol.
+
+## Surfacing activity and dissolved oxygen
+
+Spatial and temporal analyses used manually annotated frames from the training and validation recording sessions. Of 21,274 surfacing-fish box centres, 97.86% were in a near-wall band covering approximately 27.75% of the water surface. Mean annotated fish counts per frame across 55 recording segments were negatively associated with dissolved oxygen (Spearman's ρ = −0.848). These analyses link visual observations with water-quality measurements in the studied tank.
 
 ## Dataset and evaluation
 
 The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. Training and validation data are available from the authors on reasonable request.
 
-The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). The release's accompanying COCO annotation file contains 2,525 boxes; use [`data/test_reference_2521.json`](data/test_reference_2521.json) for the 2,521-box evaluation reported above. The JSON maps each image ID to a list of `[x1, y1, x2, y2]` reference boxes in pixel coordinates.
+The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). Download [`annotations_2521.zip`](https://github.com/2636456295a-collab/VDF-DETR/releases/download/v1.0-testset/annotations_2521.zip) for the paper's COCO-format test annotations. Its SHA-256 is `9a4813d62b68ec658b7590abaa7c97298350abf2f8b320bdcb092a1a9d825199`. The earlier `annotations.zip` asset contains 2,525 boxes.
+
+The same 2,521 paper reference boxes are also available as [`data/test_reference_2521.json`](data/test_reference_2521.json), which maps each image ID to a list of `[x1, y1, x2, y2]` reference boxes in pixel coordinates.
 
 To evaluate saved prediction records against the paper's references:
 
