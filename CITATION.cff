@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or the dataset, please cite this repository."
-title: "VDF-DETR: lightweight RGB-D fish detection in recirculating aquaculture"
+title: "VDF-DETR: RGB-D detection and spatial analysis of surfacing mandarin fish under declining dissolved oxygen"
 authors:
   - name: "VDF-DETR contributors"
 version: 1.0.0
