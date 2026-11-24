@@ -59,19 +59,15 @@ Spatial and temporal analyses used manually annotated frames from the training a
 
 ## Dataset and evaluation
 
-The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. Training and validation data are available from the authors on reasonable request.
-
-The RGB-D test images and depth maps are available in the [`v1.0-testset` release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset). Download [`annotations_2521.zip`](https://github.com/2636456295a-collab/VDF-DETR/releases/download/v1.0-testset/annotations_2521.zip) for the paper's COCO-format test annotations. Its SHA-256 is `9a4813d62b68ec658b7590abaa7c97298350abf2f8b320bdcb092a1a9d825199`. For version traceability, the earlier `annotations.zip` asset contains 2,525 boxes; the 2,521-box version is the reference for the reported paper results.
-
-The same 2,521 paper reference boxes are also available as [`data/test_reference_2521.json`](data/test_reference_2521.json), which maps each image ID to a list of `[x1, y1, x2, y2]` reference boxes in pixel coordinates.
+The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. The datasets used in this study, including the RGB-D images, depth maps, validity masks and annotations for the training, validation and test splits, are available from the authors upon reasonable request.
 
 To evaluate saved prediction records against the paper's references:
 
 ```bash
-python tools/evaluate_test_predictions.py --predictions predictions.json --references data/test_reference_2521.json --confidence 0.50
+python tools/evaluate_test_predictions.py --predictions predictions.json --references /path/to/test_reference_2521.json --confidence 0.50
 ```
 
-The command requires `pycocotools` and saved prediction records in the format described in [`configs/formal50.md`](configs/formal50.md). It evaluates saved predictions; the command does not itself generate predictions or train a model.
+The command requires the test reference annotations obtained from the authors, `pycocotools` and saved prediction records in the format described in [`configs/formal50.md`](configs/formal50.md). It evaluates saved predictions; the command does not itself generate predictions or train a model.
 
 ## Implementation
 
@@ -87,4 +83,4 @@ The Pico-series configurations use COCO-pretrained DEIMv2-Pico initialization, 9
 
 ## License and citation
 
-Code is provided under the [MIT license](LICENSE). The released dataset subset is CC BY 4.0. Please cite the repository when using the code or data; article citation details will be added when available. See [`CITATION.cff`](CITATION.cff).
+Code is provided under the [MIT license](LICENSE). Please cite the repository when using the code; article citation details will be added when available. See [`CITATION.cff`](CITATION.cff).
