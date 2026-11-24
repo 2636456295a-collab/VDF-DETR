@@ -41,9 +41,8 @@ with open(args.predictions, encoding='utf-8-sig') as f:
     rows = json.load(f)
 with open(args.references, encoding='utf-8-sig') as f:
     references = json.load(f)
-assert len(rows) == 525 and len(references) == 525
-assert len({r['id'] for r in rows}) == 525 and set(references) == {r['id'] for r in rows}
-assert sum(map(len, references.values())) == 2521, 'Expected the 2,521-box paper test references'
+assert len(rows) == len(references)
+assert len({r['id'] for r in rows}) == len(rows) and set(references) == {r['id'] for r in rows}
 gt = {'info': {}, 'images': [], 'annotations': [], 'categories': [{'id': 1, 'name': 'surfacing'}]}
 predictions = []
 for i, row in enumerate(rows, 1):

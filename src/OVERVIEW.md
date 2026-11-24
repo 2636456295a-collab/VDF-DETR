@@ -10,8 +10,8 @@ The repository provides research implementations of VDF-DETR, including the mode
 | `short20_common.py` | Shared IO, retry and job utilities. |
 | `formal_train.py` | Standalone trainer reproducing the exact loop (AdamW, backbone lr_scale 0.5, EMA 0.9999 / 2000 warmups, epoch-wise linear decay, clip 10, fliplr 0.5) without the legacy queue dependencies. Writes the full hyperparameter record into each run's config. |
 | `../tools/formal50_unified_eval.py` | Recomputes validation metrics from available predictions. |
-| `../tools/cloud_unified_validation.py` | Corresponding recomputation on the 525-frame validation split. |
-| `../tools/evaluate_test_predictions.py` | Computes P/R/F1 and COCO AP from saved predictions against the 525-image, 2,521-box test reference set. |
+| `../tools/cloud_unified_validation.py` | Corresponding validation metric recomputation. |
+| `../tools/evaluate_test_predictions.py` | Computes P/R/F1 and COCO AP from saved predictions and reference boxes. |
 
 ## Internal keys
 
@@ -24,7 +24,7 @@ The scripts were written for two machines and contain hard-coded roots:
 - local: `F:/GUIYU` and `ROOT = Path(__file__).resolve().parents[1]`
 - cloud: `/home/waas/GUIYU`, `GUIYU_ROOT`, `FORMAL_DATA`, `FORMAL_EVAL_OUTPUT`
 
-Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. The RGB-D datasets and corresponding annotations are available from the authors upon reasonable request. Obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release and prepare the paired RGB-D data as described in the README and manuscript.
+Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. Obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release.
 
 ## Dependencies
 

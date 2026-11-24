@@ -8,7 +8,7 @@ VDF-DETR is a lightweight RGB-D detector for surfacing mandarin fish (*Siniperca
 
 ## Detection performance
 
-The test set contains 525 paired RGB-D images of a replacement fish group recorded on a separate day in the same system. Results use the paper's 2,521 reference boxes. Precision, recall and F1 use confidence 0.50 and matching IoU 0.50; AP follows COCO-style evaluation with up to 300 detections per image.
+Precision, recall and F1 use confidence 0.50 and matching IoU 0.50; AP follows COCO-style evaluation with up to 300 detections per image.
 
 | Model | P (%) | R (%) | F1 (%) | AP50 (%) | AP50–95 (%) | Parameters (M) | GFLOPs | FPS |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -39,7 +39,7 @@ VDF-DETR improves F1 by 2.85 percentage points and AP50–95 by 2.17 points over
 | Pico + DEB + direct depth + RSA | 92.47 | 87.62 | 89.98 | 95.44 | 82.29 |
 | **VDF-DETR** | **95.00** | 85.92 | **90.23** | **95.64** | **82.67** |
 
-With DEB and RSA retained, VGDF improves precision by 2.53 percentage points and AP50–95 by 0.38 points compared with direct depth fusion. The fraction of detections that are false positives (1 − precision) decreases from 7.53% to 5.00%; recall is 85.92% versus 87.62% for direct fusion.
+With DEB and RSA retained, VGDF improves precision by 2.53 percentage points and AP50–95 by 0.38 points compared with direct depth fusion.
 
 ## Depth-input comparison
 
@@ -55,19 +55,7 @@ Mismatched values are the mean ± sample standard deviation over ten pairings. S
 
 ## Surfacing activity and dissolved oxygen
 
-Spatial and temporal analyses used manually annotated frames from the training and validation recording sessions. Of 21,274 surfacing-fish box centres, 97.86% were in a near-wall band covering approximately 27.75% of the water surface. Mean annotated fish counts per frame across 55 recording segments were negatively associated with dissolved oxygen (Spearman's ρ = −0.848). These analyses link visual observations with water-quality measurements in the studied tank.
-
-## Dataset and evaluation
-
-The dataset contains 5,250 paired RGB-D images: 4,200 for training, 525 for validation and 525 for testing. The validation and test references contain 2,550 and 2,521 boxes, respectively. The datasets used in this study, including the RGB-D images, depth maps, validity masks and annotations for the training, validation and test splits, are available from the authors upon reasonable request.
-
-To evaluate saved prediction records against the paper's references:
-
-```bash
-python tools/evaluate_test_predictions.py --predictions predictions.json --references /path/to/test_reference_2521.json --confidence 0.50
-```
-
-The command requires the test reference annotations obtained from the authors, `pycocotools` and saved prediction records in the format described in [`configs/formal50.md`](configs/formal50.md). It evaluates saved predictions; the command does not itself generate predictions or train a model.
+Spatial analysis found that 97.86% of surfacing-fish box centres were in a near-wall band covering approximately 27.75% of the water surface. Mean annotated fish counts per frame were negatively associated with dissolved oxygen (Spearman's ρ = −0.848).
 
 ## Implementation
 

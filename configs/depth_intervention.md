@@ -18,10 +18,6 @@ All three conditions use the **same trained VDF-DETR weights and the same images
 
 For the mismatched condition, ten one-to-one pairings are generated within the recording session using seeds 43–52. Donor depth maps and masks move together; cyclic shifting prevents a frame from retaining its own depth. Results are reported as the mean and sample standard deviation.
 
-## Data
-
-525 validation images / 2 550 `surfacing` boxes. The 525-image test set is used for the comparisons in Tables 3 and 4.
-
 ## Metrics
 
 P, R, F1, AP50 and AP50–95 computed with the same unified `score()` and COCO evaluation path used for the main comparison (`tools/formal50_unified_eval.py`). Confidence was fixed at 0.50 and matching IoU was 0.50.
