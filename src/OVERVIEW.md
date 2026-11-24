@@ -24,7 +24,7 @@ The scripts were written for two machines and contain hard-coded roots:
 - local: `F:/GUIYU` and `ROOT = Path(__file__).resolve().parents[1]`
 - cloud: `/home/waas/GUIYU`, `GUIYU_ROOT`, `FORMAL_DATA`, `FORMAL_EVAL_OUTPUT`
 
-Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. The RGB-D test subset and its annotations are available through the [v1.0-testset release](https://github.com/2636456295a-collab/VDF-DETR/releases/tag/v1.0-testset); the paper's test reference boxes are also available in [`data/test_reference_2521.json`](../data/test_reference_2521.json). Obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release and prepare the paired RGB-D training and validation data as described in the README and manuscript.
+Before running, set those environment variables or edit the `ROOT` / `WORK` / `JOB` constants. The RGB-D datasets and corresponding annotations are available from the authors upon reasonable request. Obtain `deimv2_pico_coco.safetensors` from the upstream DEIMv2 release and prepare the paired RGB-D data as described in the README and manuscript.
 
 ## Dependencies
 
