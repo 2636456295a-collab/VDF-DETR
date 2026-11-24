@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this code or the dataset, please cite this repository."
+message: "If you use this code, please cite this repository."
 title: "VDF-DETR: RGB-D detection and spatial analysis of surfacing mandarin fish under declining dissolved oxygen"
 authors:
   - name: "VDF-DETR contributors"
