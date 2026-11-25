@@ -69,6 +69,10 @@ Spatial analysis found that 97.86% of surfacing-fish box centres were in a near-
 
 The Pico-series configurations use COCO-pretrained DEIMv2-Pico initialization, 960 × 960 inputs, and checkpoint selection based on validation AP50–95. For training configuration and evaluation details see [`configs/formal50.md`](configs/formal50.md) and [`src/OVERVIEW.md`](src/OVERVIEW.md).
 
+## Data availability
+
+The dataset used in this study is available from the authors upon reasonable request.
+
 ## License and citation
 
 Code is provided under the [MIT license](LICENSE). Please cite the repository when using the code; article citation details will be added when available. See [`CITATION.cff`](CITATION.cff).
